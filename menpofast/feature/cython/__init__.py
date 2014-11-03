@@ -1,1 +1,1 @@
-from menpofast.menpofast.feature.cython import gradient
+from .gradient import gradient
