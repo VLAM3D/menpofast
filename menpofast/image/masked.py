@@ -4,7 +4,7 @@ from warnings import warn
 import numpy as np
 
 from menpo.visualize.base import ImageViewer
-from .menpofast.menpofast.image.base import Image
+from .base import Image
 from .boolean import BooleanImage
 
 

@@ -12,7 +12,7 @@ from menpo.landmark import LandmarkableViewable
 from menpo.transform import (Translation, NonUniformScale,
                              AlignmentUniformScale, Affine)
 from menpo.visualize.base import ImageViewer
-from .menpofast.menpofast.image.cython import extract_patches
+from .cython import extract_patches
 from .interpolation import scipy_interpolation, cython_interpolation
 
 

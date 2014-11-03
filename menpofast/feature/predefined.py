@@ -1,6 +1,6 @@
 from functools import partial
 
-from .menpofast.menpofast.feature.features import daisy, dsift
+from .features import daisy, dsift
 
 
 aam_daisy = partial(daisy, step=1, rings=1, radius=5, histograms=0,
