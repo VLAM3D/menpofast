@@ -528,7 +528,7 @@ class Image(Vectorizable, LandmarkableViewable):
             gradient of a 2D, single channel image, will have length `2`.
             The length of a 2D, 3-channel image, will have length `6`.
         """
-        from menpofast.menpofast.feature import gradient
+        from menpofast.feature import gradient
         return gradient(self)
 
     def crop_inplace(self, min_indices, max_indices,
@@ -1272,7 +1272,7 @@ class Image(Vectorizable, LandmarkableViewable):
         image_pyramid:
             Generator yielding pyramid layers as menpo image objects.
         """
-        from menpofast.menpofast.feature import gaussian_filter
+        from menpofast.feature import gaussian_filter
         if sigma is None:
             sigma = downscale / 3.
         image = self

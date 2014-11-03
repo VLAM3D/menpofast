@@ -631,7 +631,7 @@ class MaskedImage(Image):
         """
         global binary_erosion, gradient
         if gradient is None:
-            from menpofast.menpofast.feature import gradient
+            from menpofast.feature import gradient
             # reference
         # use the feature to take the gradient as normal
         grad_image = gradient(self)
