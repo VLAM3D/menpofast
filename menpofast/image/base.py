@@ -12,7 +12,6 @@ from menpo.landmark import LandmarkableViewable
 from menpo.transform import (Translation, NonUniformScale,
                              AlignmentUniformScale, Affine)
 from menpo.visualize.base import ImageViewer
-from .cython import extract_patches
 from .interpolation import scipy_interpolation, cython_interpolation
 
 
@@ -1506,22 +1505,4 @@ def round_image_shape(shape, round):
     return tuple(getattr(np, round)(shape).astype(np.int))
 
 
-def build_parts_image(image, centres, parts_shape, offsets=np.array([[0, 0]]),
-                      normalize_parts=False):
-
-    # call cython module
-    parts = extract_patches(image.pixels, np.round(centres.points),
-                            np.array(parts_shape), offsets)
-
-    # build parts image
-    # img.pixels: n_channels x n_centres x n_offsets x height x width
-    img = Image(parts)
-
-    if normalize_parts:
-        # normalize parts if required
-        img.normalize_norm_inplace()
-
-    return img
-
-
-from .menpofast.menpofast.image.masked import MaskedImage
+from .masked import MaskedImage

@@ -1,1 +1,1 @@
-from menpofast.menpofast.image.cython import extract_patches
+from .extract_patches import extract_patches

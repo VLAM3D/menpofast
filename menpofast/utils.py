@@ -3,6 +3,7 @@ from __future__ import division
 import numpy as np
 
 from .image import Image, MaskedImage, BooleanImage
+from .image.cython import extract_patches
 
 
 def convert_from_menpo(menpo_image):
@@ -44,3 +45,21 @@ def convert_to_menpo(image):
         menpo_image.landmarks = image.landmarks
 
     return menpo_image
+
+
+def build_parts_image(image, centres, parts_shape, offsets=np.array([[0, 0]]),
+                      normalize_parts=False):
+
+    # extract patches
+    parts = extract_patches(image.pixels, np.round(centres.points),
+                            np.array(parts_shape), offsets)
+
+    # build parts image
+    # img.pixels: n_channels x n_centres x n_offsets x height x width
+    img = Image(parts)
+
+    if normalize_parts:
+        # normalize parts if required
+        img.normalize_norm_inplace()
+
+    return img
