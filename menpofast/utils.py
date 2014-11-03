@@ -2,7 +2,7 @@ from __future__ import division
 
 import numpy as np
 
-from .menpofast.menpofast.image import Image, MaskedImage, BooleanImage
+from .image import Image, MaskedImage, BooleanImage
 
 
 def convert_from_menpo(menpo_image):
