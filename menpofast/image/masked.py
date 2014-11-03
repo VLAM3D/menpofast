@@ -1,11 +1,12 @@
 from __future__ import division
 from warnings import warn
+
 import numpy as np
 
 from menpo.visualize.base import ImageViewer
-
-from .base import Image
+from .menpofast.menpofast.image.base import Image
 from .boolean import BooleanImage
+
 
 gradient = None  # avoid circular reference, from menpo.feature
 binary_erosion = None  # expensive, from scipy.ndimage
@@ -630,7 +631,7 @@ class MaskedImage(Image):
         """
         global binary_erosion, gradient
         if gradient is None:
-            from menpofast.feature import gradient
+            from menpofast.menpofast.feature import gradient
             # reference
         # use the feature to take the gradient as normal
         grad_image = gradient(self)

@@ -1,11 +1,9 @@
-import itertools
 import numpy as np
-
 from skimage.feature import daisy as skimage_daisy
 from cyvlfeat.sift.dsift import dsift as cyvlfeat_dsift
 
 from .base import ndfeature, winitfeature
-from .cython import gradient as cython_gradient
+from .menpofast.menpofast.feature.cython import gradient as cython_gradient
 
 scipy_gaussian_filter = None  # expensive
 

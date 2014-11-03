@@ -12,8 +12,7 @@ from menpo.landmark import LandmarkableViewable
 from menpo.transform import (Translation, NonUniformScale,
                              AlignmentUniformScale, Affine)
 from menpo.visualize.base import ImageViewer
-
-from .cython import extract_patches
+from .menpofast.menpofast.image.cython import extract_patches
 from .interpolation import scipy_interpolation, cython_interpolation
 
 
@@ -530,7 +529,7 @@ class Image(Vectorizable, LandmarkableViewable):
             gradient of a 2D, single channel image, will have length `2`.
             The length of a 2D, 3-channel image, will have length `6`.
         """
-        from menpofast.feature import gradient
+        from menpofast.menpofast.feature import gradient
         return gradient(self)
 
     def crop_inplace(self, min_indices, max_indices,
@@ -1274,7 +1273,7 @@ class Image(Vectorizable, LandmarkableViewable):
         image_pyramid:
             Generator yielding pyramid layers as menpo image objects.
         """
-        from menpofast.feature import gaussian_filter
+        from menpofast.menpofast.feature import gaussian_filter
         if sigma is None:
             sigma = downscale / 3.
         image = self
@@ -1525,4 +1524,4 @@ def build_parts_image(image, centres, parts_shape, offsets=np.array([[0, 0]]),
     return img
 
 
-from .masked import MaskedImage
+from .menpofast.menpofast.image.masked import MaskedImage

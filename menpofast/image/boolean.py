@@ -1,7 +1,8 @@
 from warnings import warn
+
 import numpy as np
 
-from .base import Image
+from .menpofast.menpofast.image.base import Image
 
 
 class BooleanImage(Image):
