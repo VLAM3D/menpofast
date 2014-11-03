@@ -1,4 +1,4 @@
-menpo-fastimages
+menpofast
 ================
 
-Menpo Image package with channels at the front.
+Menpo Image package (& some features) with channels at the front.
