@@ -85,9 +85,9 @@ cdef void slice_image(double[:, :, :] image,
 
     for i in range(n_centres):
         for j in range(n_offsets):
-            patches[:,
-                    i,
+            patches[i,
                     j,
+                    :,
                     ins_s_min[total_index, 0]:ins_s_max[total_index, 0],
                     ins_s_min[total_index, 1]:ins_s_max[total_index, 1]
             ] = \
@@ -123,9 +123,9 @@ cpdef extract_patches(double[:,:,:] image, double[:,:] centres, long[:] patch_sh
         long[:,:] ins_s_max = np.empty([n_augmented_centres, 2], dtype=int)
         long[:,:] ins_s_min = np.empty([n_augmented_centres, 2], dtype=int)
 
-        np.ndarray[double, ndim=5] patches = np.zeros([n_channels,
-                                                       n_centres,
+        np.ndarray[double, ndim=5] patches = np.zeros([n_centres,
                                                        n_offsets,
+                                                       n_channels,
                                                        patch_shape0,
                                                        patch_shape1])
 

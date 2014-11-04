@@ -55,11 +55,11 @@ def build_parts_image(image, centres, parts_shape, offsets=np.array([[0, 0]]),
                             np.array(parts_shape), offsets)
 
     # build parts image
-    # img.pixels: n_channels x n_centres x n_offsets x height x width
+    # img.pixels: n_centres x n_offsets x n_channels x height x width
     img = Image(parts)
 
     if normalize_parts:
         # normalize parts if required
-        img.normalize_norm_inplace()
+        img.normalize_norm_inplace(mode='per_channel')
 
     return img
