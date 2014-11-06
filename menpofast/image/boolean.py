@@ -122,7 +122,7 @@ class BooleanImage(Image):
 
         :type: double
         """
-        return (self.n_true * 1.0) / self.n_pixels
+        return (self.n_true() * 1.0) / self.n_pixels
 
     def proportion_false(self):
         r"""
@@ -130,7 +130,7 @@ class BooleanImage(Image):
 
         :type: double
         """
-        return (self.n_false * 1.0) / self.n_pixels
+        return (self.n_false() * 1.0) / self.n_pixels
 
     def true_indices(self):
         r"""
@@ -138,8 +138,8 @@ class BooleanImage(Image):
 
         :type: (`n_dims`, `n_true`) ndarray
         """
-        if self.all_true:
-            return self.indices
+        if self.all_true():
+            return self.indices()
         else:
             # Ignore the channel axis
             return np.vstack(np.nonzero(self.pixels[0, ...])).T
@@ -156,7 +156,7 @@ class BooleanImage(Image):
     def __str__(self):
         return ('{} {}D mask, {:.1%} '
                 'of which is True'.format(self._str_shape, self.n_dims,
-                                          self.proportion_true))
+                                          self.proportion_true()))
 
     def from_vector(self, vector, copy=True):
         r"""
@@ -247,7 +247,7 @@ class BooleanImage(Image):
             along each dimension. If constrain_to_bounds was True,
             is clipped to legal image bounds.
         """
-        mpi = self.true_indices
+        mpi = self.true_indices()
         maxes = np.max(mpi, axis=0) + boundary
         mins = np.min(mpi, axis=0) - boundary
         if constrain_to_bounds:
@@ -389,7 +389,7 @@ class BooleanImage(Image):
         """
         # start from a copy of the template_mask
         warped_img = template_mask.copy()
-        if warped_img.all_true:
+        if warped_img.all_true():
             # great, just reshape the sampled_pixel_values
             warped_img.pixels = sampled_pixel_values.reshape(
                 (1,) + warped_img.shape)

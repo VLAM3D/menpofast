@@ -13,6 +13,7 @@ from menpo.transform import (Translation, NonUniformScale,
                              AlignmentUniformScale, Affine)
 from menpo.visualize.base import ImageViewer
 from .interpolation import scipy_interpolation, cython_interpolation
+from .cython import extract_patches
 
 
 class ImageBoundaryError(ValueError):
@@ -924,7 +925,7 @@ class Image(Vectorizable, LandmarkableViewable):
             raise ValueError(
                 "Trying to warp a {}D image with a {}D transform "
                 "(they must match)".format(self.n_dims, transform.n_dims))
-        template_points = template_mask.true_indices
+        template_points = template_mask.true_indices()
         points_to_sample = transform.apply(template_points)
         # we want to sample each channel in turn, returning a vector of
         # sampled pixels. Store those in a (n_pixels, n_channels) array.
