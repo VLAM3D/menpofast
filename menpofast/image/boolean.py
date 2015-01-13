@@ -106,7 +106,7 @@ class BooleanImage(Image):
 
         :type: int
         """
-        return self.n_pixels - self.n_true
+        return self.n_pixels - self.n_true()
 
     def all_true(self):
         r"""
@@ -455,6 +455,6 @@ class BooleanImage(Image):
 
         pwa = PiecewiseAffine(pointcloud, pointcloud)
         try:
-            pwa.apply(self.indices)
+            pwa.apply(self.indices())
         except TriangleContainmentError as e:
             self.from_vector_inplace(~e.points_outside_source_domain)

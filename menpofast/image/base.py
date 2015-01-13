@@ -503,7 +503,7 @@ class Image(Vectorizable, LandmarkableViewable):
         return ImageViewer(figure_id, new_figure, self.n_dims,
                            pixels_to_view, channels=channels).render(**kwargs)
 
-    def view_widget(self, popup=False):
+    def view_widget(self, popup=False, **kwargs):
         r"""
         Visualizes the image object using the
         menpo.visualize.widgets.visualize_images widget.
@@ -514,7 +514,7 @@ class Image(Vectorizable, LandmarkableViewable):
             If enabled, the widget will appear as a popup window.
         """
         from menpo.visualize import visualize_images
-        visualize_images(self, figure_size=(7, 7), popup=popup)
+        visualize_images(self, figure_size=(7, 7), popup=popup, **kwargs)
 
     def gradient(self, **kwargs):
         r"""
