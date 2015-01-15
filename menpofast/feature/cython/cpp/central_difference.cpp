@@ -15,8 +15,8 @@ void central_difference(const double* in, const int rows, const int cols,
     #pragma omp for
     for (int k = 0; k < n_channels; k += 1) {
         // row-derivative
-        for (int i = 0; i < rows; i += 1) {
-            for (int j = 0; j < cols; j += 1) {
+        for (int i = 0; i < cols; i += 1) {
+            for (int j = 0; j < rows; j += 1) {
                 if (j == 0) {
                     output_index = SUB2IND(0, i, k, rows, cols, n_output_channels);
                     out[output_index] = in[SUB2IND(1, i, k, rows, cols, n_channels)] - in[SUB2IND(0, i, k, rows, cols, n_channels)];

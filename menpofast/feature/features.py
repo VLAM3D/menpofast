@@ -37,7 +37,7 @@ def daisy(pixels, step=4, radius=15, rings=3, histograms=8, orientations=8,
 
 
 @winitfeature
-def dsift(pixels, step=1, size=3, bounds=None, window_size=2, norm=False,
+def dsift(pixels, step=1, size=3, bounds=None, window_size=2, norm=True,
           fast=False, float_descriptors=True, geometry=(4, 4, 8)):
     centers, output = cyvlfeat_dsift(np.rot90(pixels[0, ..., ::-1]),
                                      step=step, size=size, bounds=bounds,

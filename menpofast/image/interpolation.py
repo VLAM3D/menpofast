@@ -99,5 +99,5 @@ def cython_interpolation(pixels, template_shape, h_transform, mode='constant',
         warped_channels.append(_warp_fast(pixels[i, ...], matrix,
                                           output_shape=template_shape,
                                           mode=mode, order=order, cval=cval))
-    warped_channels = [v.reshape([-1, 1]) for v in warped_channels]
+    warped_channels = [v.reshape([1, -1]) for v in warped_channels]
     return np.concatenate(warped_channels, axis=0)

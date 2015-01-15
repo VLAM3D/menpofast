@@ -106,7 +106,7 @@ class BooleanImage(Image):
 
         :type: int
         """
-        return self.n_pixels - self.n_true
+        return self.n_pixels - self.n_true()
 
     def all_true(self):
         r"""
