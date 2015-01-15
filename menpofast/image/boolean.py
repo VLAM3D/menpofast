@@ -455,6 +455,6 @@ class BooleanImage(Image):
 
         pwa = PiecewiseAffine(pointcloud, pointcloud)
         try:
-            pwa.apply(self.indices)
+            pwa.apply(self.indices())
         except TriangleContainmentError as e:
             self.from_vector_inplace(~e.points_outside_source_domain)
