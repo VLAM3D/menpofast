@@ -39,17 +39,29 @@ def daisy(pixels, step=4, radius=15, rings=3, histograms=8, orientations=8,
 @winitfeature
 def dsift(pixels, step=1, size=3, bounds=None, window_size=2, norm=True,
           fast=False, float_descriptors=True, geometry=(4, 4, 8)):
-    centers, output = cyvlfeat_dsift(np.rot90(pixels[0, ..., ::-1]),
-                                     step=step, size=size, bounds=bounds,
-                                     window_size=window_size, norm=norm,
-                                     fast=fast,
-                                     float_descriptors=float_descriptors,
-                                     geometry=geometry)
-    shape = pixels.shape[1:] - 2 * centers[:2, 0]
-    return (np.require(output.reshape((-1, shape[0], shape[1])),
-                       dtype=np.double),
-            np.require(centers[:2, ...].T[..., ::-1].reshape(
-                (shape[0], shape[1], 2)), dtype=np.int))
+    
+    # If norm is set to True, then the centers array will have a third column
+    # with descriptor norm, or energy, before contrast normalization.
+    # This information can be used to suppress low contrast descriptors.
+    centers, output = cyvlfeat_dsift(
+        pixels[0], step=step,
+        size=size, bounds=bounds,
+        norm=norm, fast=fast, float_descriptors=float_descriptors,
+        geometry=geometry,
+        verbose=False)
+
+    # the output shape can be calculated from looking at the range of
+    # centres / the window step size in each dimension. Note that cyvlfeat
+    # returns x, y centres.
+    shape = (((centers[-1, 0:2] - centers[0, 0:2]) /
+              [step, step]) + 1).astype(np.int)
+
+    # return SIFT and centers in the correct form
+    return (np.require(np.rollaxis(output.reshape((shape[0], shape[1], -1)),
+                                   -1),
+                       dtype=np.double, requirements=['C']),
+            np.require(centers.reshape((shape[0], shape[1], -1)),
+                       dtype=np.int))
 
 
 
