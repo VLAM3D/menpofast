@@ -57,13 +57,11 @@ def dsift(pixels, step=1, size=3, bounds=None, window_size=2, norm=True,
               [step, step]) + 1).astype(np.int)
 
     # return SIFT and centers in the correct form
-    return (np.require(np.rollaxis(output.reshape((shape[0], shape[1], -1)),
-                                   -1),
-                       dtype=np.double, requirements=['C']),
-            np.require(centers.reshape((shape[0], shape[1], -1)),
-                       dtype=np.int))
-
-
+    feature = np.require(np.rollaxis(output.reshape((shape[0], shape[1], -1)), -1), dtype=np.double, requirements=['C'])
+    centres = np.require(centers.reshape((shape[0], shape[1], -1)), dtype=np.int)
+    centres = centres[:,:,0:2]
+    return feature, centres
+    
 
 @ndfeature
 def no_op(image_data):
